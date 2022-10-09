@@ -1,0 +1,23 @@
+galaxy_info:
+  author: digimokan
+  description: "Install and configure the tmux terminal-multiplexer application"
+  license: "MIT"
+  min_ansible_version: 2.7
+  platforms:
+    - name: Archlinux
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+        - jammy
+    - name: FreeBSD
+      versions:
+        - all
+  galaxy_tags:
+    - archlinux
+    - ubuntu
+    - freebsd
+    - tmux
+
