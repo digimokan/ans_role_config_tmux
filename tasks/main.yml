@@ -1,0 +1,6 @@
+- name: "Install tmux and supporting utilities"
+  ansible.builtin.include_tasks: install/main.yml
+
+- name: "Configure tmux and supporting utilities"
+  ansible.builtin.include_tasks: configure/main.yml
+

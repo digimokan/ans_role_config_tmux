@@ -1,0 +1,6 @@
+# See tmux docs for list of key names:
+#   https://github.com/tmux/tmux/wiki/Modifier-Keys
+
+# tmux prefix: type this first, to start sending key-presses to tmux
+keymap_prefix: 'C-Space'
+

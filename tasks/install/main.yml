@@ -1,0 +1,24 @@
+- name: "Install the 'tmux' application package"
+  ansible.builtin.package:
+    name: tmux
+    state: present
+  become: true
+  become_user: root
+
+- name: "Install the 'xsel' copy/paste utility"
+  ansible.builtin.package:
+    name: xsel
+    state: present
+  become: true
+  become_user: root
+  when: (ansible_distribution == "Ubuntu") or
+        (ansible_os_family == "Archlinux")
+
+- name: "install the 'xsel' copy/paste utility"
+  ansible.builtin.package:
+    name: xsel-conrad
+    state: present
+  become: true
+  become_user: root
+  when: ansible_os_family == "FreeBSD"
+
