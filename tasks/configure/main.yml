@@ -8,3 +8,11 @@
   become: true
   become_user: root
 
+- name: "Export cmd for other roles: start tmux session in new term emulator instance"
+  ansible.builtin.set_fact:
+    start_tmux_in_term_emulator: >-
+      {{ start_term_emulator_run_cmd_prefix }}
+      'tmux new-session -d;
+      tmux set-hook client-attached "set-option destroy-unattached on";
+      tmux attach;'
+
