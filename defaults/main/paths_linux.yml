@@ -1,0 +1,3 @@
+# system tmux config file path
+linux_tmux_config_file_path: '/etc/tmux.conf'
+

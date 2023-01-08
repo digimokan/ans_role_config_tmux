@@ -1,6 +1,12 @@
-- name: "Install tmux and supporting utilities"
-  ansible.builtin.include_tasks: install/main.yml
+- name: "Run all role tasks for Linux"
+  ansible.builtin.include_tasks: run_all_tasks.yml
+  vars:
+    system_tmux_config_file_path: "{{ linux_tmux_config_file_path }}"
+  when: ansible_system == "Linux"
 
-- name: "Configure tmux and supporting utilities"
-  ansible.builtin.include_tasks: configure/main.yml
+- name: "Run all role tasks for FreeBSD"
+  ansible.builtin.include_tasks: run_all_tasks.yml
+  vars:
+    system_tmux_config_file_path: "{{ freebsd_tmux_config_file_path }}"
+  when: ansible_os_family == "FreeBSD"
 

@@ -1,1 +1,10 @@
+- name: "Configure system-wide tmux settings in '{{ system_tmux_config_file_path }}'"
+  ansible.builtin.template:
+    dest: "{{ system_tmux_config_file_path }}"
+    src: "tmux_conf.j2"
+    owner: 'root'
+    mode: '644'
+    force: yes
+  become: true
+  become_user: root
 

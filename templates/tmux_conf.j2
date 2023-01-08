@@ -1,0 +1,179 @@
+# vim: set filetype=tmux:
+# ANSIBLE-MANAGED CONFIGURATION FILE
+
+################################################################################
+# KEYBINDINGS
+################################################################################
+
+unbind-key -a                   # rem default keybindings to start from scratch
+set-option -g prefix 'C-Space'  # prefix: press this before 'bind-key' keys
+bind-key 'C-Space' send-prefix  # pass-through prefix to vt when pressed twice
+set-option -s escape-time 1     # delay in ms when sending cmds to tmux
+set-option -g repeat-time 1000  # use 'bind-key -r' to repeat key within XX ms
+
+################################################################################
+# HELP
+################################################################################
+
+bind-key '?' list-keys -T prefix    # list all 'normal mode' keybindings
+
+################################################################################
+# COLOR PROFILE
+################################################################################
+
+# set virtual terminal type (always ends in "256color")
+set-option -g default-terminal "tmux-256color"
+
+################################################################################
+# STATUSLINE [tmux-current-pane-hostname]
+################################################################################
+
+set-option -g status-interval 1 # statusline update interval in seconds
+set-option -g status-style fg=colour252,bg=colour237 # basic statusline bg/fg
+
+# statusline left side
+set-option -g status-left-length 50
+set-option -g status-left '#[fg=colour250,bg=colour125,none]#{?client_prefix, CMD ,}'
+set-option -ag status-left '#[fg=colour250,bg=colour21,none]#{?#{==:#{pane_mode},copy-mode}, COPY ,}'
+set-option -ag status-left '#[fg=colour232,bg=colour130,bold]#{?#{m:[0-9]*,#{session_name}},, #{session_name} }'
+set-option -ag status-left '#[fg=colour232,bg=colour136,bold]#{?#{m:*fatal: not a git repository*,#(cd "#{pane_current_path}"; git rev-parse --abbrev-ref HEAD 2>&1)},, ☈ #(cd "#{pane_current_path}"; git rev-parse --abbrev-ref HEAD) }'
+
+# statusline center
+set-option -g window-status-separator '  '
+set-option -g window-status-format '#W'
+set-option -g window-status-current-format ' #W '
+set-option -g window-status-style 'fg=colour172,bg=colour237,bold'
+set-option -g window-status-current-style 'fg=colour232,bg=colour172,bold'
+set-option -g status-justify centre
+set-window-option -g window-status-activity-style 'fg=colour232,bold,bg=colour161'
+set-window-option -g window-status-bell-style 'fg=colour232,bold,bg=colour161'
+
+# statusline right side
+set-option -g status-right-length 50
+set-option -g status-right '#[fg=colour232,bg=colour95,bold] #{?#{==:#{pane_current_command},ssh},#{pane_title},#(who | cut -d" " -f1)@#(hostname)} '
+
+################################################################################
+# SERVER
+# A single server on system runs in the bg, independent of VTs.
+# Server options set with set-option -s
+################################################################################
+
+# allow server to run even if there are no attached clients
+# --> server will ALWAYS quit if there are no sessions
+set-option -s exit-unattached off
+
+################################################################################
+# CLIENTS
+# The virtual terms (e.g. urxvt) are the clients that tmux sessions attach to.
+################################################################################
+
+# pass terminal focus events into apps running in terminal (e.g. vim)
+set-option -g focus-events on
+
+# use tsl/fsl terminfo for window title, set window title format
+set-option -g set-titles on
+set-option -g set-titles-string " #{pane_title} "
+
+################################################################################
+# SESSIONS
+# The tmux interfaces that attach to clients and "overlay" them.
+# Current session options set with set-option (add -g for all sessions)
+################################################################################
+
+# set session to be killed-on-detach when you attach to it
+set-hook -g client-attached "set-option destroy-unattached on"
+
+# do NOT kill session when it detaches IF you have renamed session explicitly
+set-hook -g session-renamed "set-option destroy-unattached off"
+
+bind-key 'b' choose-tree -s                       # switch to sess interactively
+bind-key 'R' command-prompt "rename-session '%%'" # rename current session
+bind-key 'Tab' kill-session                       # close and destroy session
+
+################################################################################
+# WINDOWS
+# Window option set with set-window-option (add -g for all windows)
+################################################################################
+
+set-option -g base-index 1                        # starting win index
+set-window-option -g monitor-activity off         # highlt sl win with activity
+set-window-option -g monitor-bell on              # highlt sl win with bell
+set-option -g visual-activity on                  # show msg for win with activity
+
+bind-key 't' new-window -c '#{pane_current_path}' # create and go to new window
+bind-key -r '.' next-window                       # go to next window
+bind-key -r ',' previous-window                   # go to prev window
+bind-key -r '<' swap-window -t -1                 # move curr window left
+bind-key -r '>' swap-window -t +1                 # move curr window right
+bind-key 'r' command-prompt "rename-window '%%'"  # rename current window
+bind-key 'j' choose-window 'join-pane -h -s "%%"' # select pane to bring to curr win
+bind-key 'J' choose-window 'move-window -s "%%"'  # select win to bring to curr win
+bind-key 'X' kill-window                          # close win (and all panes)
+
+################################################################################
+# PANES [vim-tmux-navigator]
+################################################################################
+
+set-option -g pane-base-index 1      # starting pane index
+
+# inactive/active pane borders
+set-window-option -g pane-border-style 'fg=colour94'
+set-window-option -g pane-active-border-style 'fg=colour232,bg=colour94'
+
+bind-key 's' split-window -v -c '#{pane_current_path}'  # make new horiz split
+bind-key 'v' split-window -h -c '#{pane_current_path}'  # make new vert split
+bind-key 'Space' next-layout         # cycle through various preset pane layouts
+bind-key -r 'Left' resize-pane -L 5  # extend current pane to left
+bind-key -r 'Right' resize-pane -R 5 # extend current pane to right
+bind-key -r 'Down' resize-pane -D 5  # extend current pane down
+bind-key -r 'Up' resize-pane -U 5    # extend current pane up
+bind-key 'y' resize-pane -Z          # full-screen toggle curr pane
+bind-key 'w' break-pane              # make curr pane a new window
+bind-key 'z' set-window-option 'synchronize-panes'  # type in all panes at once
+bind-key 'x' kill-pane               # close curr pane (and win, if last pane)
+
+# pane switching with awareness of vim splits
+# see https://github.com/christoomey/vim-tmux-navigator for source
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h'  'select-pane -L'
+bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j'  'select-pane -D'
+bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k'  'select-pane -U'
+bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
+
+################################################################################
+# CMD MODE
+################################################################################
+
+set-option -g status-keys 'emacs'                   # make ESC work in cmd line
+set-option -g message-style 'fg=colour232,bold,bg=colour180'  # cmd mode bg/fg
+
+bind-key \; command-prompt    # enter command mode
+
+################################################################################
+# COPY MODE
+################################################################################
+
+# use vi-like keybindings in copy mode
+set-window-option -g mode-keys vi
+
+bind-key 'm' run-shell "tmux copy-mode; tmux send-keys g; tmux send-keys /"
+bind-key '/' run-shell "tmux copy-mode; tmux send-keys ?"
+
+bind-key 'c' copy-mode                                      # enter copy mode
+bind-key 'PageUp' copy-mode -u                              # enter copy mode and page-up
+bind-key -T copy-mode-vi '-' send-keys -X end-of-line       # go to end of line
+bind-key -T copy-mode-vi 'v' send-keys -X begin-selection   # start vis selection
+bind-key -T copy-mode-vi 'V' send-keys -X select-line       # start vis-line selection
+bind-key -T copy-mode-vi 'c' send-keys -X clear-selection   # clear selection
+bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "xsel -i -p && xsel -o -p | xsel -i -b"  # copy to sys clipboard (req xsel)
+bind-key 'p' run-shell "xsel -o | tmux load-buffer -; tmux paste-buffer" # paste from sys clipboard (req xsel)
+bind-key -T copy-mode-vi 'Escape' send-keys -X cancel       # leave copy mode
+
+################################################################################
+# MOUSE
+################################################################################
+
+# mouse support
+set-option -g mouse off
+
