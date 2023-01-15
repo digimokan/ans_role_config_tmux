@@ -9,7 +9,7 @@
 #     --> exiting all running session shell procs will kill session
 
 tmux new-session -s $$ -d
-tmux set-hook -t $$ client-attached "set-option destroy-unattached off"
+tmux set-hook -t $$ client-attached "set-option destroy-unattached on"
 tmux send-keys -t $$ 'exec {{ start_tmux_session_in_term.shell }}' Enter
 tmux send-keys -t $$ 'clear' Enter
 tmux attach -t $$
