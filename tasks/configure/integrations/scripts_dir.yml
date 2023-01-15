@@ -1,0 +1,9 @@
+- name: "Create tmux utility scripts dir at '{{ tmux_utility_script_dir }}'"
+  ansible.builtin.file:
+    path: "{{ tmux_utility_script_dir }}"
+    state: directory
+    owner: "{{ tmux_user_name }}"
+    mode: '755'
+  become: true
+  become_user: root
+

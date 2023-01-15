@@ -1,0 +1,10 @@
+- name: "Configure tmux settings for user '{{ tmux_user_name }}' in '{{ tmux_user_config_file_path }}'"
+  ansible.builtin.template:
+    dest: "{{ tmux_user_config_file_path }}"
+    src: "tmux_conf.j2"
+    owner: "{{ tmux_user_name }}"
+    mode: '644'
+    force: yes
+  become: true
+  become_user: root
+

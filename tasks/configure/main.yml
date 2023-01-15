@@ -1,18 +1,10 @@
-- name: "Configure system-wide tmux settings in '{{ system_tmux_config_file_path }}'"
-  ansible.builtin.template:
-    dest: "{{ system_tmux_config_file_path }}"
-    src: "tmux_conf.j2"
-    owner: 'root'
-    mode: '644'
-    force: yes
-  become: true
-  become_user: root
+- name: "Configure all tmux settings for user {{ tmux_user_name }}"
+  ansible.builtin.include_tasks: settings.yml
 
-- name: "Export cmd for other roles: start tmux session in new term emulator instance"
-  ansible.builtin.set_fact:
-    start_tmux_in_term_emulator: >-
-      {{ start_term_emulator_run_cmd_prefix }}
-      'tmux new-session -d;
-      tmux set-hook client-attached "set-option destroy-unattached on";
-      tmux attach;'
+- name: "Create tmux utility scripts directory"
+  ansible.builtin.include_tasks: integrations/scripts_dir.yml
+
+- name: "Create tmux_cmd_start_session_in_term_emulator var, export for other roles"
+  ansible.builtin.include_tasks: integrations/start_session_in_term.yml
+  when: start_tmux_session_in_term is defined
 

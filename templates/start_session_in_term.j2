@@ -1,0 +1,16 @@
+#!/bin/sh
+# vim: set filetype=sh:
+# ANSIBLE-MANAGED CONFIGURATION FILE
+# purpose: start session for terminal emulator (with specified shell) in tmux
+# --> on session start (when session has PID name)
+#     --> kill session on detach
+# --> if/when user gives session a name
+#     --> don't kill session on detach
+#     --> exiting all running session shell procs will kill session
+
+tmux new-session -s $$ -d
+tmux set-hook -t $$ client-attached "set-option destroy-unattached off"
+tmux send-keys -t $$ 'exec {{ start_tmux_session_in_term.shell }}' Enter
+tmux send-keys -t $$ 'clear' Enter
+tmux attach -t $$
+

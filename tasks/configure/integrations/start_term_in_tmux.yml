@@ -1,0 +1,18 @@
+- name: "Create utility script: '{{ script_path }}'"
+  ansible.builtin.template:
+    dest: "{{ script_path }}"
+    src: "start_session_in_term.j2"
+    owner: "{{ tmux_user_name }}"
+    mode: '755'
+    force: yes
+  vars:
+    script_path: "{{ tmux_utility_script_dir }}/start_session_in_term.sh"
+  become: true
+  become_user: root
+
+- name: "Export cmd as var, for other roles: tmux_cmd_start_session_in_term_emulator"
+  ansible.builtin.set_fact:
+    tmux_cmd_start_session_in_term_emulator: >-
+      {{ start_tmux_session_in_term.run_term_cmd }}
+      {{ tmux_utility_script_dir }}/start_session_in_term.sh
+

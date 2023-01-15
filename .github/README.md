@@ -56,7 +56,8 @@ Install and configure the tmux terminal-multiplexer application.
            name: ans_role_config_tmux
            public: yes
          vars:
-           start_term_emulator_run_cmd_prefix: 'xterm -e'
+           tmux_user: 'user2'
+           start_tmux_session_in_term: { run_term_cmd: 'xterm -e', shell: 'fish' }
    ```
 
 ## Role Options
@@ -67,7 +68,7 @@ See the role `defaults` files, for overridable vars:
 
 Define these _required_ vars for the role:
 
-  * `start_term_emulator_run_cmd_prefix`: start term emulator and run cmd in it
+  * `tmux_user`: user to configure tmux for
 
 ## Contributing
 

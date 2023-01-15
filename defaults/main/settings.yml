@@ -1,3 +1,6 @@
+# user-specific main tmux config file path
+tmux_user_config_file_path: "/home/{{ tmux_user_name }}/.tmux.conf"
+
 # See tmux docs for list of key names:
 #   https://github.com/tmux/tmux/wiki/Modifier-Keys
 
