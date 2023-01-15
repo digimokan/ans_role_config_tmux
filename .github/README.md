@@ -56,7 +56,7 @@ Install and configure the tmux terminal-multiplexer application.
            name: ans_role_config_tmux
            public: yes
          vars:
-           tmux_user: 'user2'
+           tmux_user_name: 'user2'
            start_tmux_session_in_term: { run_term_cmd: 'xterm -e', shell: 'fish' }
    ```
 
