@@ -36,7 +36,7 @@ set-option -g status-left-length 50
 set-option -g status-left '#[fg=colour250,bg=colour125,none]#{?client_prefix, CMD ,}'
 set-option -ag status-left '#[fg=colour250,bg=colour21,none]#{?#{==:#{pane_mode},copy-mode}, COPY ,}'
 set-option -ag status-left '#[fg=colour232,bg=colour130,bold]#{?#{m:[0-9]*,#{session_name}},, #{session_name} }'
-set-option -ag status-left '#[fg=colour232,bg=colour136,bold]#{?#{m:*fatal: not a git repository*,#(cd "#{pane_current_path}"; git rev-parse --abbrev-ref HEAD 2>&1)},, ☈ #(cd "#{pane_current_path}"; git rev-parse --abbrev-ref HEAD) }'
+set-option -ag status-left '#[fg=colour232,bg=colour136,bold]#{?#{m:NOREPO,#(cd "#{pane_current_path}"; git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "NOREPO")},, ☈ #{?#{m:DETACHED,#(cd "#{pane_current_path}"; git symbolic-ref --short --quiet HEAD 2>/dev/null || echo "DETACHED")},#(cd "#{pane_current_path}"; git rev-parse --short HEAD) (detached),#(cd "#{pane_current_path}"; git symbolic-ref --short HEAD)} }'
 
 # statusline center
 set-option -g window-status-separator '  '
