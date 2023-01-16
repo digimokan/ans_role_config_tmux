@@ -14,8 +14,8 @@ tmux new-session -s $$ -d
 tmux set-hook -t $$ client-attached "set-option destroy-unattached on"
 # replace current (system) shell proc with fish, so 'exit' runs immediately
 tmux send-keys -t $$ 'exec {{ start_tmux_session_in_term.shell }}' Enter
-# clear screen
-tmux send-keys -t $$ -R
 # finally, attach to the session
 tmux attach -t $$
+# clear screen
+tmux send-keys -t $$ -R
 
