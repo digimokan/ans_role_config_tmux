@@ -17,5 +17,5 @@ tmux send-keys -t $$ 'exec {{ start_tmux_session_in_term.shell }}' Enter
 # finally, attach to the session
 tmux attach -t $$
 # clear screen
-tmux send-keys -t $$ -R
+tmux send-keys -t $$ ' clear' Enter
 
