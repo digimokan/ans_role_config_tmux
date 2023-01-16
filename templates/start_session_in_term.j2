@@ -16,7 +16,7 @@ tmux set-hook -t $$ client-attached "set-option destroy-unattached on"
 tmux send-keys -t $$ 'exec {{ start_tmux_session_in_term.shell }}' Enter
 # wait for send-keys exec to take effect, then clear screen
 sleep 0.1
-tmux send-keys -t $$ ' clear' Enter
+tmux send-keys -t $$ -R
 # finally, attach to the session
 tmux attach -t $$
 
