@@ -13,6 +13,6 @@
 - name: "Export cmd as var, for other roles: tmux_cmd_start_session_in_term_emulator"
   ansible.builtin.set_fact:
     tmux_cmd_start_session_in_term_emulator: >-
-      {{ start_tmux_session_in_term.run_term_cmd }}
-      {{ tmux_utility_script_dir }}/start_session_in_term.sh
+      {{ start_tmux_session_in_term.term_cmd }}
+      {{ start_tmux_session_in_term.term_arg_exec }}'{{ tmux_utility_script_dir }}/start_session_in_term.sh'
 

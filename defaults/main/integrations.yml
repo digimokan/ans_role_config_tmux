@@ -4,6 +4,7 @@ tmux_utility_script_dir: "/home/{{ tmux_user_name }}/.config/tmux/scripts"
 # when this dict is defined, tmux_cmd_start_session_in_term_emulator is exported
 # see start_session_in_term template for info on script features
 # start_tmux_session_in_term:
-  # run_term_cmd: 'xterm -e'
+  # term_cmd: 'xterm'
+  # term_arg_exec: '-e '
   # shell: 'fish'
 
