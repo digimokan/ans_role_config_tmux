@@ -6,5 +6,12 @@ tmux_utility_script_dir: "/home/{{ tmux_user_name }}/.config/tmux/scripts"
 # start_tmux_session_in_term:
   # term_cmd: 'xterm'
   # term_arg_exec: '-e '
-  # shell: 'fish'
+
+# when this array of dicts is defined, a set of dot-desktop files is created
+#   e.g. 'start_ranger_in_tmux.desktop'
+# each dot-desktop file launches a user-specified cli prog with a tmux session
+# see start_session_prog_in_term template for info on script features
+start_tmux_session_prog_in_term: []
+# start_tmux_session_prog_in_term:
+#   - { cli: 'ranger_cd', name: 'ranger' }
 

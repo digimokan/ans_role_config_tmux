@@ -1,10 +1,6 @@
 - name: "Configure all tmux settings for user {{ tmux_user_name }}"
-  ansible.builtin.include_tasks: settings.yml
+  ansible.builtin.include_tasks: settings/main.yml
 
-- name: "Create tmux utility scripts directory"
-  ansible.builtin.include_tasks: integrations/scripts_dir.yml
-
-- name: "Create tmux_cmd_start_session_in_term_emulator var, export for other roles"
-  ansible.builtin.include_tasks: integrations/start_session_in_term.yml
-  when: start_tmux_session_in_term is defined
+- name: "Configure user-specified terminal and program tmux launchers"
+  ansible.builtin.include_tasks: integrations/main.yml
 

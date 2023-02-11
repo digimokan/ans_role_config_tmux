@@ -10,8 +10,8 @@
 
 # create the session already detached
 tmux new-session -s $$ -d
-# replace current (system) shell proc with fish, so 'exit' runs immediately
-tmux send-keys -t $$ 'exec {{ start_tmux_session_in_term.shell }}' Enter
+# replace current (system) shell proc with user shell, so 'exit' runs immediately
+tmux send-keys -t $$ 'exec {{ tmux_shell }}' Enter
 # tell this particular session to destruct when it becomes unatached
 tmux set-hook -t $$ client-attached "set-option destroy-unattached on"
 # clear screen, to remove 'exec' cmd

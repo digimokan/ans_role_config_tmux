@@ -1,0 +1,14 @@
+- name: "Create user '{{ script_name }}' script"
+  ansible.builtin.template:
+    dest: "/usr/local/bin/{{ script_name }}"
+    src: "start_session_prog_in_term.j2"
+    owner: 'root'
+    mode: '755'
+    force: yes
+  vars:
+    script_name: "start_{{ user_prog.name }}_in_tmux.sh"
+    prog_name: "{{ user_prog.name }}"
+    prog_cli: "{{ user_prog.cli }}"
+  become: true
+  become_user: root
+

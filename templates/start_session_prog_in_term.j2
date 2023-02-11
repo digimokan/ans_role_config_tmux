@@ -1,0 +1,21 @@
+#!/bin/sh
+# vim: set filetype=sh:
+# ANSIBLE-MANAGED CONFIGURATION FILE
+# purpose: start session for terminal emulator (with specified shell) in tmux
+# --> run a user-specified program at CLI immediately on launch
+# --> do not kill session on detach
+# --> exiting all running session shell procs will kill session
+
+# kill any existing session for the prog, if it's already running
+tmux has-session -t '{{ prog_name }}' && tmux kill-session -t '{{ prog_name }}'
+# create a new session for the prog, already detached
+tmux new-session -s '{{ prog_name }}' -d
+# replace current (system) shell proc with user shell, so 'exit' runs immediately
+tmux send-keys -t '{{ prog_name }}' 'exec {{ tmux_shell }}' Enter
+# tell this particular session to persist if it becomes unattached
+tmux set-hook -t '{{ prog_name }}' client-attached "set-option destroy-unattached off"
+# start the user-specified program in the session
+tmux send-keys -t '{{ prog_name }}' '{{ prog_cli }}' Enter
+# finally, attach to the session
+tmux attach -t '{{ prog_name }}'
+
