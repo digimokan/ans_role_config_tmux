@@ -1,0 +1,3 @@
+# the shell to run with tmux
+tmux_shell: 'bash'
+

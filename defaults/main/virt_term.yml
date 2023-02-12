@@ -1,0 +1,15 @@
+# command to start a terminal emulator used with tmux
+tmux_cmd_start_term_emulator: 'xterm'
+
+# command-line arg to pass to terminal emulator to exec a program
+tmux_cmd_term_emulator_exec_arg: '-e'
+
+# virtual-terminal type
+# see https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-a-256-colour-terminal
+tmux_virt_term_type: 'tmux-256color'
+
+# since escape keysym is used for special sequences AND as regular "ESC",
+# the terminal needs to debounce to figure out the intent
+# see https://github.com/tmux/tmux/wiki/FAQ#what-is-the-escape-time-option-is-zero-a-good-value
+tmux_escape_keysym_debounce_time_ms: '1'
+

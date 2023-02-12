@@ -4,3 +4,9 @@
 # tmux prefix: type this first, to start sending key-presses to tmux
 keymap_prefix: 'C-Space'
 
+# pass-through prefix to virtual terminal when its pressed twice
+keymap_prefix_passthrough: true
+
+# within xxxx mS, a keymap will be repeated without having to re-type the prefix
+keymap_repeat_window_ms: '1000'
+

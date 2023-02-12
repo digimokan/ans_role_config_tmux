@@ -5,11 +5,21 @@
 # KEYBINDINGS
 ################################################################################
 
-unbind-key -a                   # rem default keybindings to start from scratch
-set-option -g prefix 'C-Space'  # prefix: press this before 'bind-key' keys
-bind-key 'C-Space' send-prefix  # pass-through prefix to vt when pressed twice
-set-option -s escape-time 1     # delay in ms when sending cmds to tmux
-set-option -g repeat-time 1000  # use 'bind-key -r' to repeat key within XX ms
+# remove all default keybindings, to start from scratch
+unbind-key -a
+
+# prefix: press this before 'bind-key' keys
+set-option -g prefix '{{ keymap_prefix }}'
+
+# pass-through prefix to virtual terminal when its pressed twice
+{{ ('bind-key \'' + keymap_prefix + '\' send-prefix') if keymap_prefix_passthrough else '# do not pass-through' }}
+# bind-key 'C-Space' send-prefix
+
+# delay in mS, for processing ESC vs ESC-Keycode special sequences
+set-option -s escape-time {{ tmux_escape_keysym_debounce_time_ms }}
+
+# use 'bind-key -r' to repeat key within XX ms
+set-option -g repeat-time {{ keymap_repeat_window_ms }}
 
 ################################################################################
 # HELP
@@ -22,7 +32,7 @@ bind-key '?' list-keys -T prefix    # list all 'normal mode' keybindings
 ################################################################################
 
 # set virtual terminal type (always ends in "256color")
-set-option -g default-terminal "tmux-256color"
+set-option -g default-terminal '{{ tmux_virt_term_type }}'
 
 ################################################################################
 # STATUSLINE [tmux-current-pane-hostname]
