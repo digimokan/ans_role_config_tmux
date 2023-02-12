@@ -10,3 +10,6 @@ keymap_prefix_passthrough: true
 # within xxxx mS, a keymap will be repeated without having to re-type the prefix
 keymap_repeat_window_ms: '1000'
 
+# show all normal-mode keybindings (provides a kind of 'help menu')
+keymap_help_menu: '?'
+

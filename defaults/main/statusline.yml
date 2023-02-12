@@ -1,0 +1,14 @@
+# Note: color scheme relies on tmux-256color terminal type
+# Color-Code Ref: https://superuser.com/a/1104214
+
+# interval at which statusline is updated, in seconds
+statusline_update_interval_sec: '1'
+
+# statusline fixed char-lengths for left/right sides
+statusline_left_side_length: '50'
+statusline_right_side_length: '50'
+
+# main statusline background and foreground colors
+statusline_main_color_bg: 'colour237'
+statusline_main_color_fg: 'colour252'
+

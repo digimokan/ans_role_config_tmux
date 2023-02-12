@@ -25,7 +25,8 @@ set-option -g repeat-time {{ keymap_repeat_window_ms }}
 # HELP
 ################################################################################
 
-bind-key '?' list-keys -T prefix    # list all 'normal mode' keybindings
+# list all 'normal mode' keybindings
+bind-key '{{ keymap_help_menu }}' list-keys -T prefix
 
 ################################################################################
 # COLOR PROFILE
@@ -38,11 +39,14 @@ set-option -g default-terminal '{{ tmux_virt_term_type }}'
 # STATUSLINE [tmux-current-pane-hostname]
 ################################################################################
 
-set-option -g status-interval 1 # statusline update interval in seconds
-set-option -g status-style fg=colour252,bg=colour237 # basic statusline bg/fg
+# statusline update interval in seconds
+set-option -g status-interval {{ statusline_update_interval_sec }}
+
+# main statusline background and foreground colors
+set-option -g status-style fg={{ statusline_main_color_fg }},bg={{ statusline_main_color_bg }}
 
 # statusline left side
-set-option -g status-left-length 50
+set-option -g status-left-length {{ statusline_left_side_length }}
 set-option -g status-left '#[fg=colour250,bg=colour125,none]#{?client_prefix, CMD ,}'
 set-option -ag status-left '#[fg=colour250,bg=colour21,none]#{?#{==:#{pane_mode},copy-mode}, COPY ,}'
 set-option -ag status-left '#[fg=colour232,bg=colour130,bold]#{?#{m:[0-9]*,#{session_name}},, #{session_name} }'
@@ -59,7 +63,7 @@ set-window-option -g window-status-activity-style 'fg=colour232,bold,bg=colour16
 set-window-option -g window-status-bell-style 'fg=colour232,bold,bg=colour161'
 
 # statusline right side
-set-option -g status-right-length 50
+set-option -g status-right-length {{ statusline_right_side_length }}
 set-option -g status-right '#[fg=colour232,bg=colour95,bold] #{?#{==:#{pane_current_command},ssh},#{pane_title},#(who | cut -d" " -f1)@#(hostname)} '
 
 ################################################################################
