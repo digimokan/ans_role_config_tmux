@@ -1,0 +1,10 @@
+# vim: set filetype=desktop:
+# ANSIBLE-MANAGED CONFIGURATION FILE
+# purpose: launch start_session_prog_in_term_sh script via WM or DE
+
+[Desktop Entry]
+Type=Application
+Name=Tmux Session: {{ prog_name }}
+Exec={{ start_script_in_term_emulator_cmd }}
+Terminal=true
+

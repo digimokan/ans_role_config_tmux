@@ -8,9 +8,13 @@
 - name: "Create 'start_xxxx_in_tmux.desktop' files, for user-specified progs"
   ansible.builtin.include_tasks: start_session_prog_in_term.yml
   vars:
-    script_name: "start_{{ user_prog.name }}_in_tmux.sh"
+    script_path: "{{ tmux_utility_script_dir }}/start_{{ user_prog.name }}_in_tmux.sh"
+    dot_desktop_path: "{{ dot_desktop_files_dir }}/start_{{ user_prog.name }}_in_tmux.desktop"
     prog_name: "{{ user_prog.name }}"
     prog_cli: "{{ user_prog.cli }}"
+    start_script_in_term_emulator_cmd: >-
+      {{ tmux_cmd_start_term_emulator }}
+      {{ tmux_cmd_term_emulator_exec_arg }}'{{ script_path }}'
   loop: "{{ create_start_tmux_session_prog_in_term_dot_deskop_file }}"
   loop_control:
     loop_var: user_prog
