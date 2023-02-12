@@ -1,7 +1,7 @@
 - name: "Create utility script: '{{ script_path }}'"
   ansible.builtin.template:
     dest: "{{ script_path }}"
-    src: "start_session_in_term.j2"
+    src: "start_session_in_term_sh.j2"
     owner: "{{ tmux_user_name }}"
     mode: '755'
     force: yes
