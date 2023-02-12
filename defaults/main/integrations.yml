@@ -1,17 +1,19 @@
-# utility scripts used for integrating tmux with other applications
-tmux_utility_script_dir: "/home/{{ tmux_user_name }}/.config/tmux/scripts"
-
-# when this dict is defined, tmux_cmd_start_session_in_term_emulator is exported
+# export a tmux_cmd_start_session_in_term_emulator cmd for other roles to use
+# the cmd performs these actions:
+#   1. launches a new term emulator instance
+#   2. runs the user-specified shell in the instance
+#   3. starts a new destroy-on-window-close tmux session in the instance
 # see start_session_in_term template_sh for info on script features
-# start_tmux_session_in_term:
-  # term_cmd: 'xterm'
-  # term_arg_exec: '-e '
+export_start_tmux_term_session_cmd: true
 
-# when this array of dicts is defined, a set of dot-desktop files is created
-#   e.g. 'start_ranger_in_tmux.desktop'
-# each dot-desktop file launches a user-specified cli prog with a tmux session
+# create a set of system dot-desktop files launchable with a WM or DE
+# each dot-desktop file performs these actions
+#   1. launches a new term emulator instance
+#   2. runs the user-specified shell in the instance
+#   3. starts a user-specified CLI prog (e.g. ranger, mutt) in the instance
+#   4. starts a new persist-on-window-close tmux session in the instance
 # see start_session_prog_in_term_sh template for info on script features
-start_tmux_session_prog_in_term: []
-# start_tmux_session_prog_in_term:
+create_start_tmux_session_prog_in_term_dot_deskop_file: []
+# create_start_tmux_session_prog_in_term_dot_deskop_file:
 #   - { cli: 'ranger_cd', name: 'ranger' }
 

@@ -1,0 +1,9 @@
+# the shell to run with tmux
+tmux_shell: 'bash'
+
+# command to start a terminal emulator used with tmux
+tmux_cmd_start_term_emulator: 'xterm'
+
+# command-line arg to pass to terminal emulator to exec a program
+tmux_cmd_term_emulator_exec_arg: '-e'
+

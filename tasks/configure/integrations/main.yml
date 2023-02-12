@@ -3,11 +3,11 @@
 
 - name: "Create tmux_cmd_start_session_in_term_emulator var, export for other roles"
   ansible.builtin.include_tasks: start_session_in_term.yml
-  when: start_tmux_session_in_term is defined
+  when: export_start_tmux_term_session_cmd
 
 - name: "Create 'start_xxxx_in_tmux.desktop' files, for user-specified progs"
   ansible.builtin.include_tasks: start_session_prog_in_term.yml
-  loop: "{{ start_tmux_session_prog_in_term }}"
+  loop: "{{ create_start_tmux_session_prog_in_term_dot_deskop_file }}"
   loop_control:
     loop_var: user_prog
 
