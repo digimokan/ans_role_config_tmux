@@ -47,24 +47,24 @@ set-option -g status-style fg={{ statusline_main_color_fg }},bg={{ statusline_ma
 
 # statusline left side
 set-option -g status-left-length {{ statusline_left_side_length }}
-set-option -g status-left '#[fg=colour250,bg=colour125,none]#{?client_prefix, CMD ,}'
-set-option -ag status-left '#[fg=colour250,bg=colour21,none]#{?#{==:#{pane_mode},copy-mode}, COPY ,}'
-set-option -ag status-left '#[fg=colour232,bg=colour130,bold]#{?#{m:[0-9]*,#{session_name}},, #{session_name} }'
-set-option -ag status-left '#[fg=colour232,bg=colour136,bold]#{?#{m:NOREPO,#(cd "#{pane_current_path}"; git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "NOREPO")},, ☈ #{?#{m:DETACHED,#(cd "#{pane_current_path}"; git symbolic-ref --short --quiet HEAD 2>/dev/null || echo "DETACHED")},#(cd "#{pane_current_path}"; git rev-parse --short HEAD) (detached),#(cd "#{pane_current_path}"; git symbolic-ref --short HEAD)} }'
+set-option -g status-left '#[fg={{ statusline_left_side_cmd_ind_fg }},bg={{ statusline_left_side_cmd_ind_bg }},none]#{?client_prefix, CMD ,}'
+set-option -ag status-left '#[fg={{ statusline_left_side_copy_ind_fg }},bg={{ statusline_left_side_copy_ind_bg }},none]#{?#{==:#{pane_mode},copy-mode}, COPY ,}'
+set-option -ag status-left '#[fg={{ statusline_left_side_session_name_ind_fg }},bg={{ statusline_left_side_session_name_ind_bg }},bold]#{?#{m:[0-9]*,#{session_name}},, #{session_name} }'
+set-option -ag status-left '#[fg={{ statusline_left_side_git_ind_fg }},bg={{ statusline_left_side_git_ind_bg }},bold]#{?#{m:NOREPO,#(cd "#{pane_current_path}"; git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "NOREPO")},, ☈ #{?#{m:DETACHED,#(cd "#{pane_current_path}"; git symbolic-ref --short --quiet HEAD 2>/dev/null || echo "DETACHED")},#(cd "#{pane_current_path}"; git rev-parse --short HEAD) (detached),#(cd "#{pane_current_path}"; git symbolic-ref --short HEAD)} }'
 
 # statusline center
 set-option -g window-status-separator '  '
 set-option -g window-status-format '#W'
 set-option -g window-status-current-format ' #W '
-set-option -g window-status-style 'fg=colour172,bg=colour237,bold'
-set-option -g window-status-current-style 'fg=colour232,bg=colour172,bold'
+set-option -g window-status-style 'fg={{ statusline_center_inactive_window_inds_fg }},bg={{ statusline_center_inactive_window_inds_bg }},bold'
+set-option -g window-status-current-style 'fg={{ statusline_center_active_window_ind_fg }},bg={{ statusline_center_active_window_ind_bg }},bold'
 set-option -g status-justify centre
-set-window-option -g window-status-activity-style 'fg=colour232,bold,bg=colour161'
-set-window-option -g window-status-bell-style 'fg=colour232,bold,bg=colour161'
+set-window-option -g window-status-activity-style 'fg={{ statusline_center_bell_alert_ind_fg }},bold,bg={{ statusline_center_bell_alert_ind_bg }}'
+set-window-option -g window-status-bell-style 'fg={{ statusline_center_bell_alert_ind_fg }},bold,bg={{ statusline_center_bell_alert_ind_bg }}'
 
 # statusline right side
 set-option -g status-right-length {{ statusline_right_side_length }}
-set-option -g status-right '#[fg=colour232,bg=colour95,bold] #{?#{==:#{pane_current_command},ssh},#{pane_title},#(who | cut -d" " -f1)@#(hostname)} '
+set-option -g status-right '#[fg={{ statusline_right_side_user_host_ind_fg }},bg={{ statusline_right_side_user_host_ind_bg }},bold] #{?#{==:#{pane_current_command},ssh},#{pane_title},#(who | cut -d" " -f1)@#(hostname)} '
 
 ################################################################################
 # SERVER

@@ -1,14 +1,36 @@
 # Note: color scheme relies on tmux-256color terminal type
 # Color-Code Ref: https://superuser.com/a/1104214
 
-# interval at which statusline is updated, in seconds
+# statusline update interval, in seconds
 statusline_update_interval_sec: '1'
 
-# statusline fixed char-lengths for left/right sides
+# fixed char-lengths for statusline left/right sides
 statusline_left_side_length: '50'
 statusline_right_side_length: '50'
 
 # main statusline background and foreground colors
-statusline_main_color_bg: 'colour237'
 statusline_main_color_fg: 'colour252'
+statusline_main_color_bg: 'colour237'
+
+# statusline left-side colors
+statusline_left_side_cmd_ind_fg: 'colour250'
+statusline_left_side_cmd_ind_bg: 'colour125'
+statusline_left_side_copy_ind_fg: 'colour250'
+statusline_left_side_copy_ind_bg: 'colour21'
+statusline_left_side_session_name_ind_fg: 'colour232'
+statusline_left_side_session_name_ind_bg: 'colour130'
+statusline_left_side_git_ind_fg: 'colour232'
+statusline_left_side_git_ind_bg: 'colour136'
+
+# statusline center colors
+statusline_center_active_window_ind_fg: 'colour232'
+statusline_center_active_window_ind_bg: 'colour172'
+statusline_center_inactive_window_inds_fg: 'colour172'
+statusline_center_inactive_window_inds_bg: 'colour237'
+statusline_center_bell_alert_ind_fg: 'colour232'
+statusline_center_bell_alert_ind_bg: 'colour161'
+
+# statusline right-side colors
+statusline_right_side_user_host_ind_fg: 'colour232'
+statusline_right_side_user_host_ind_bg: 'colour95'
 
