@@ -1,6 +1,3 @@
-# Note: color scheme relies on tmux-256color terminal type
-# Color-Code Ref: https://superuser.com/a/1104214
-
 # statusline update interval, in seconds
 statusline_update_interval_sec: '1'
 

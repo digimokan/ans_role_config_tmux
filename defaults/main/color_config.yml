@@ -1,0 +1,6 @@
+# virtual-terminal type
+#   see https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-a-256-colour-terminal
+# Note: colors chosen in other default vars rely on tmux-256color terminal type
+#   see tmux-256color color chart: https://superuser.com/a/1104214
+tmux_virt_term_type: 'tmux-256color'
+
