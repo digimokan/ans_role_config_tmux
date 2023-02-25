@@ -6,7 +6,7 @@
     mode: '755'
     force: yes
   vars:
-    script_path: "{{ tmux_utility_script_dir }}/start_session_in_term.sh"
+    script_path: "{{ system_executables_dir }}/start_session_in_term.sh"
   become: true
   become_user: root
 
@@ -14,5 +14,5 @@
   ansible.builtin.set_fact:
     tmux_cmd_start_session_in_term_emulator: >-
       {{ tmux_cmd_start_term_emulator }}
-      {{ tmux_cmd_term_emulator_exec_arg }}'{{ tmux_utility_script_dir }}/start_session_in_term.sh'
+      {{ tmux_cmd_term_emulator_exec_arg }}'{{ system_executables_dir }}/start_session_in_term.sh'
 

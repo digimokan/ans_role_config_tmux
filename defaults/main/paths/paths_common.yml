@@ -2,5 +2,5 @@
 tmux_user_config_file_path: "/home/{{ tmux_user_name }}/.tmux.conf"
 
 # utility scripts used for integrating tmux with other applications
-tmux_utility_script_dir: "/home/{{ tmux_user_name }}/.config/tmux/scripts"
+system_executables_dir: "/usr/local/bin"
 

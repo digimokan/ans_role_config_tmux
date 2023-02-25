@@ -1,19 +1,21 @@
 # export a tmux_cmd_start_session_in_term_emulator cmd for other roles to use
-# the cmd performs these actions:
+# the cli cmd performs these actions:
 #   1. launches a new term emulator instance
 #   2. runs the user-specified shell in the instance
 #   3. starts a new destroy-on-window-close tmux session in the instance
 # see start_session_in_term template_sh for info on script features
 export_start_tmux_term_session_cmd: true
 
-# create a set of system dot-desktop files launchable with a WM or DE
-# each dot-desktop file performs these actions
+# create start_xxxx_in_tmux.sh scripts runnable from the system PATH
+#   -> 'xxxx' is replaced with the value of the 'name' field, below
+#   -> when dot_desktop_launcher is true, also create start_xxxx_in_tmux.desktop
+# each cli-cmd or dot-desktop-launcher performs these actions
 #   1. launches a new term emulator instance
 #   2. runs the user-specified shell in the instance
 #   3. starts a user-specified CLI prog (e.g. ranger, mutt) in the instance
 #   4. starts a new persist-on-window-close tmux session in the instance
-# see start_session_prog_in_term_sh template for info on script features
-create_start_tmux_session_prog_in_term_dot_deskop_file: []
-# create_start_tmux_session_prog_in_term_dot_deskop_file:
-#   - { cli: 'ranger_cd', name: 'ranger' }
+# see start_session_prog_in_term templates for info on script features
+create_start_tmux_session_prog_in_term_cmd: []
+# create_start_tmux_session_prog_in_term_cmd:
+#   - { cli: 'ranger_cd', name: 'ranger', dot_desktop_launcher: true }
 

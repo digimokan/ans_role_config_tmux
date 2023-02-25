@@ -1,0 +1,29 @@
+- name: "Create terminal cmd: '{{ script_path }}'"
+  ansible.builtin.template:
+    dest: "{{ script_path }}"
+    src: "start_session_prog_in_term_sh.j2"
+    owner: 'root'
+    mode: '755'
+    force: yes
+  vars:
+    script_path: "{{ system_executables_dir }}/{{ prog_file_basename }}.sh"
+  become: true
+  become_user: root
+
+- name: "Create dot-desktop-file launcher: '{{ dot_desktop_path }}'"
+  ansible.builtin.template:
+    dest: "{{ dot_desktop_path }}"
+    src: "start_session_prog_in_term_desktop.j2"
+    owner: 'root'
+    mode: '644'
+    force: yes
+  vars:
+    dot_desktop_path: "{{ system_dot_desktop_files_dir }}/{{ prog_file_basename }}.desktop"
+    script_path: "{{ system_executables_dir }}/{{ prog_file_basename }}.sh"
+    start_script_in_term_emulator_cmd: >-
+      {{ tmux_cmd_start_term_emulator }}
+      {{ tmux_cmd_term_emulator_exec_arg }}'{{ script_path }}'
+  become: true
+  become_user: root
+  when: create_dot_desktop_launcher
+
