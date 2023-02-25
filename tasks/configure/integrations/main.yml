@@ -10,6 +10,6 @@
     prog_file_basename: "start_{{ prog_name }}_in_tmux"
     create_dot_desktop_launcher: "{{ user_prog.dot_desktop_launcher }}"
   loop: "{{ create_start_tmux_session_prog_in_term_cmd }}"
-    loop_control:
-      loop_var: user_prog
+  loop_control:
+    loop_var: user_prog
 
