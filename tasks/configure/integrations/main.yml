@@ -9,6 +9,7 @@
     prog_cli: "{{ user_prog.cli }}"
     prog_file_basename: "start_{{ prog_name }}_in_tmux"
     create_dot_desktop_launcher: "{{ user_prog.dot_desktop_launcher }}"
+    persist_session_on_detach: "{{ user_prog.persist_session }}"
   loop: "{{ create_start_tmux_session_prog_in_term_cmd }}"
   loop_control:
     loop_var: user_prog

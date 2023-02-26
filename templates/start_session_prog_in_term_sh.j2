@@ -3,19 +3,19 @@
 # ANSIBLE-MANAGED CONFIGURATION FILE
 # purpose: start session for terminal emulator (with specified shell) in tmux
 # --> run a user-specified program at CLI immediately on launch
-# --> do not kill session on detach
-# --> exiting all running session shell procs will kill session
+# --> if destroy-unattached is 'off', do not kill session on detach (i.e. window close)
+# --> exiting all running session shell procs will always kill session
 
 # kill any existing session for the prog, if it's already running
-tmux has-session -t '{{ prog_name }}' && tmux kill-session -t '{{ prog_name }}'
+tmux has-session -t '{{ session_name }}' && tmux kill-session -t '{{ session_name }}'
 # create a new session for the prog, already detached
-tmux new-session -s '{{ prog_name }}' -d
+tmux new-session -s '{{ session_name }}' -d
 # replace current (system) shell proc with user shell, so 'exit' runs immediately
-tmux send-keys -t '{{ prog_name }}' 'exec {{ tmux_shell }}' Enter
+tmux send-keys -t '{{ session_name }}' 'exec {{ tmux_shell }}' Enter
 # tell this particular session to persist if it becomes unattached
-tmux set-hook -t '{{ prog_name }}' client-attached "set-option destroy-unattached off"
+tmux set-hook -t '{{ session_name }}' client-attached "set-option destroy-unattached {{ destroy_session_on_detach }}"
 # start the user-specified program in the session
-tmux send-keys -t '{{ prog_name }}' '{{ prog_cli }}' Enter
+tmux send-keys -t '{{ session_name }}' '{{ prog_cli }}' Enter
 # finally, attach to the session
-tmux attach -t '{{ prog_name }}'
+tmux attach -t '{{ session_name }}'
 
