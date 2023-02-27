@@ -1,14 +1,12 @@
 - name: "Create terminal cmd: '{{ script_path }}'"
   ansible.builtin.template:
     dest: "{{ script_path }}"
-    src: "start_session_prog_in_term_sh.j2"
+    src: "start_session_prog_in_term_{{ 'persist' if persist_session_on_detach else 'nopersist' }}_sh.j2"
     owner: 'root'
     mode: '755'
     force: yes
   vars:
     script_path: "{{ system_executables_dir }}/{{ prog_file_basename }}.sh"
-    session_name: "{{ prog_name if persist_session_on_detach else '$$' }}"
-    destroy_session_on_detach: "{{ 'off' if persist_session_on_detach else 'on' }}"
   become: true
   become_user: root
 
