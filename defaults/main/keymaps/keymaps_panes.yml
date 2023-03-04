@@ -6,3 +6,34 @@
 # Each pane is like a "split" of the current window.
 ################################################################################
 
+# create a new horizontal/vertical pane and switch to it
+keymap_new_horizontal_pane: 's'
+keymap_new_vertical_pane: 'v'
+
+# cycle through various preset pane layouts
+keymap_cycle_pane_layouts: 'Space'
+
+# extend/resize the current pane left/right/down/up
+keymap_extend_curr_pane_to_left: 'Left'
+keymap_extend_curr_pane_to_right: 'Right'
+keymap_extend_curr_pane_down: 'Down'
+keymap_extend_curr_pane_up: 'Up'
+
+# toggle fullscreen for the current pane
+keymap_toggle_pane_fullscreen: 'y'
+
+# turn the current pane into a new window
+keymap_conv_curr_pane_to_window: 'w'
+
+# mirror typing into all panes of the current window
+keymap_type_in_all_panes_at_once: 'z'
+
+# destroy the current pane (and current window, if there's only one pane)
+keymap_kill_pane: 'x'
+
+# switch to pane to left/right/down/up, with vim-split awareness
+keymap_switch_to_pane_left: 'C-h'
+keymap_switch_to_pane_right: 'C-l'
+keymap_switch_to_pane_down: 'C-j'
+keymap_switch_to_pane_up: 'C-k'
+
