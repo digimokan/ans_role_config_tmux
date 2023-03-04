@@ -100,9 +100,16 @@ set-hook -g client-attached "set-option destroy-unattached on"
 # do NOT kill session when it detaches IF you have renamed session explicitly
 set-hook -g session-renamed "set-option destroy-unattached off"
 
-bind-key 'b' choose-tree -s                       # switch to sess interactively
-bind-key 'R' command-prompt "rename-session '%%'" # rename current session
-bind-key 'Tab' kill-session                       # close and destroy session
+# in the current window, switch to another session via a selection list
+bind-key '{{ keymap_switch_to_session }}' choose-tree -s
+
+# rename the current session (which will make it persist on close)
+# Note: new terminal sessions are unnamed, and won't persist on close
+bind-key '{{ keymap_rename_session }}' command-prompt "rename-session '%%'"
+
+# destroy the current session, and all of its panes
+# Note: a session can be destroyed by this kill cmd, or by exiting all processes
+bind-key '{{ keymap_kill_session }}' kill-session
 
 ################################################################################
 # WINDOWS

@@ -1,0 +1,19 @@
+# See tmux docs for list of key names:
+#   https://github.com/tmux/tmux/wiki/Modifier-Keys
+
+################################################################################
+# SESSIONS
+# The tmux interfaces that attach to terminal clients and "overlay" them.
+################################################################################
+
+# in the current window, switch to another session via a selection list
+keymap_switch_to_session: 'b'
+
+# rename the current session (which will make it persist on close)
+# Note: new terminal sessions are unnamed, and won't persist on close
+keymap_rename_session: 'R'
+
+# destroy the current session, and all of its panes
+# Note: a session can be destroyed by this kill cmd, or by exiting all processes
+keymap_kill_session: 'Tab'
+
