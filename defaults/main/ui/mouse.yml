@@ -1,0 +1,3 @@
+# global mouse enable/disable
+enable_mouse_support: false
+

@@ -1,0 +1,34 @@
+# enter copy mode: traverse tmux buffer for current pane, in a read-only fashion
+keymap_enter_copy_mode: 'c'
+
+# enter copy mode and immediately page-up in the tmux pane buffer
+keymap_enter_copy_mode_and_pageup: 'PageUp'
+
+# exit copy mode
+keymap_exit_copy_mode: 'Escape'
+
+# search for text, downwards, from the top of the tmux pane buffer
+keymap_search_pane_downwards: 'm'
+
+# search for text, upwards, from the bottom of the tmux pane buffer
+keymap_search_pane_upwards: '/'
+
+# move the copy-mode cursor to end-of-line
+keymap_move_cursor_end_of_line: '-'
+
+# start a visual selection from the cursor-position
+keymap_start_visual_sel: 'v'
+
+# start a visual-line selection from the cursor-position
+keymap_start_visual_line_sel: 'V'
+
+# clear the visual selection, but keep cursor at current position in copy mode
+keymap_clear_visual_sel: 'c'
+
+# copy the highlighted visual selection to the sys clipboard (with xsel)
+keymap_copy_visual_sel_to_sys_clip: 'y'
+
+# paste from the system clipboard (with xsel) at current cursor position
+# technically, not copy-mode
+keymap_paste_visual_sel_from_sys_clip: 'p'
+

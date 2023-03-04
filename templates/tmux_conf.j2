@@ -217,28 +217,50 @@ bind-key {{ keymap_enter_cmd_mode }} command-prompt
 
 ################################################################################
 # COPY MODE
+# traverse the tmux buffer for the current pane, in a (mostly) read-only fashion
 ################################################################################
 
 # use vi-like keybindings in copy mode
 set-window-option -g mode-keys vi
 
-bind-key 'm' run-shell "tmux copy-mode; tmux send-keys g; tmux send-keys /"
-bind-key '/' run-shell "tmux copy-mode; tmux send-keys ?"
+# enter copy mode
+bind-key '{{ keymap_enter_copy_mode }}' copy-mode
 
-bind-key 'c' copy-mode                                      # enter copy mode
-bind-key 'PageUp' copy-mode -u                              # enter copy mode and page-up
-bind-key -T copy-mode-vi '-' send-keys -X end-of-line       # go to end of line
-bind-key -T copy-mode-vi 'v' send-keys -X begin-selection   # start vis selection
-bind-key -T copy-mode-vi 'V' send-keys -X select-line       # start vis-line selection
-bind-key -T copy-mode-vi 'c' send-keys -X clear-selection   # clear selection
-bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel "xsel -i -p && xsel -o -p | xsel -i -b"  # copy to sys clipboard (req xsel)
-bind-key 'p' run-shell "xsel -o | tmux load-buffer -; tmux paste-buffer" # paste from sys clipboard (req xsel)
-bind-key -T copy-mode-vi 'Escape' send-keys -X cancel       # leave copy mode
+# enter copy mode and immediately page-up in the tmux pane buffer
+bind-key '{{ keymap_enter_copy_mode_and_pageup }}' copy-mode -u
+
+# exit copy mode
+bind-key -T copy-mode-vi '{{ keymap_exit_copy_mode }}' send-keys -X cancel
+
+# search for text, downwards, from the top of the tmux pane buffer
+bind-key '{{ keymap_search_pane_downwards }}' run-shell "tmux copy-mode; tmux send-keys g; tmux send-keys /"
+
+# search for text, upwards, from the bottom of the tmux pane buffer
+bind-key '{{ keymap_search_pane_upwards }}' run-shell "tmux copy-mode; tmux send-keys ?"
+
+# move the copy-mode cursor to end-of-line
+bind-key -T copy-mode-vi '{{ keymap_move_cursor_end_of_line }}' send-keys -X end-of-line
+
+# start a visual selection from the cursor-position
+bind-key -T copy-mode-vi '{{ keymap_start_visual_sel }}' send-keys -X begin-selection
+
+# start a visual-line selection from the cursor-position
+bind-key -T copy-mode-vi '{{ keymap_start_visual_line_sel }}' send-keys -X select-line
+
+# clear the visual selection, but keep cursor at current position in copy mode
+bind-key -T copy-mode-vi '{{ keymap_clear_visual_sel }}' send-keys -X clear-selection
+
+# copy the highlighted visual selection to the system clipboard (with xsel)
+bind-key -T copy-mode-vi '{{ keymap_copy_visual_sel_to_sys_clip }}' send-keys -X copy-pipe-and-cancel "xsel -i -p && xsel -o -p | xsel -i -b"
+
+# paste from the system clipboard (with xsel) at current cursor position
+# technically, not copy-mode
+bind-key '{{ keymap_paste_visual_sel_from_sys_clip }}' run-shell "xsel -o | tmux load-buffer -; tmux paste-buffer"
 
 ################################################################################
 # MOUSE
 ################################################################################
 
 # mouse support
-set-option -g mouse off
+set-option -g mouse {{ 'on' if enable_mouse_support else 'off' }}
 
