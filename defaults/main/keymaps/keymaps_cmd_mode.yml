@@ -1,3 +1,0 @@
-# enter a special "command-mode" that accepts tmux-cmd syntax
-keymap_enter_cmd_mode: '\;'
-

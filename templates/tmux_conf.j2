@@ -155,15 +155,13 @@ bind-key '{{ keymap_kill_window }}' kill-window
 
 ################################################################################
 # PANES [vim-tmux-navigator]
-# Each pane is like a "split" of the current window.
 ################################################################################
 
-# starting pane index
-set-option -g pane-base-index 1
+set-option -g pane-base-index 1      # starting pane index
 
 # inactive/active pane borders
-set-window-option -g pane-border-style 'fg={{ pane_inactive_border_fg }}'
-set-window-option -g pane-active-border-style 'fg={{ pane_active_border_fg }},bg={{ pane_active_border_bg }}'
+set-window-option -g pane-border-style 'fg=colour94'
+set-window-option -g pane-active-border-style 'fg=colour232,bg=colour94'
 
 bind-key 's' split-window -v -c '#{pane_current_path}'  # make new horiz split
 bind-key 'v' split-window -h -c '#{pane_current_path}'  # make new vert split
@@ -188,17 +186,12 @@ bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l'  'select-pane -R'
 
 ################################################################################
 # CMD MODE
-# enter a special "command-mode" that accepts tmux-cmd syntax
 ################################################################################
 
-# use ESC to terminate cmd mode
-set-option -g status-keys 'emacs'
+set-option -g status-keys 'emacs'                   # make ESC work in cmd line
+set-option -g message-style 'fg=colour232,bold,bg=colour180'  # cmd mode bg/fg
 
-# cmd-mode colors
-set-option -g message-style 'fg={{ cmd_mode_fg }},bold,bg={{ cmd_mode_bg }}'
-
-# enter command mode
-bind-key '{{ keymap_enter_cmd_mode }}' command-prompt
+bind-key \; command-prompt    # enter command mode
 
 ################################################################################
 # COPY MODE
