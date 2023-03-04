@@ -1,0 +1,8 @@
+# See tmux docs for list of key names:
+#   https://github.com/tmux/tmux/wiki/Modifier-Keys
+
+################################################################################
+# PANES
+# Each pane is like a "split" of the current window.
+################################################################################
+
