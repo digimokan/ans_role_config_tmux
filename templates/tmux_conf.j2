@@ -197,8 +197,8 @@ set-option -g status-keys 'emacs'
 # cmd-mode colors
 set-option -g message-style 'fg={{ cmd_mode_fg }},bold,bg={{ cmd_mode_bg }}'
 
-# enter command mode
-bind-key '{{ keymap_enter_cmd_mode }}' command-prompt
+# enter command mode (Note: don't quote the \; literal!)
+bind-key {{ keymap_enter_cmd_mode }} command-prompt
 
 ################################################################################
 # COPY MODE
