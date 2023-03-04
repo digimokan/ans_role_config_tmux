@@ -13,7 +13,6 @@ set-option -g prefix '{{ keymap_prefix }}'
 
 # pass-through prefix to virtual terminal when its pressed twice
 {{ ('bind-key \'' + keymap_prefix + '\' send-prefix') if keymap_prefix_passthrough else '# do not pass-through' }}
-# bind-key 'C-Space' send-prefix
 
 # delay in mS, for processing ESC vs ESC-Keycode special sequences
 set-option -s escape-time {{ tmux_escape_keysym_debounce_time_ms }}
