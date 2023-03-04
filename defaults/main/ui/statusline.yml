@@ -1,6 +1,9 @@
 # statusline update interval, in seconds
 statusline_update_interval_sec: '1'
 
+# if terminal for the window does a bell, highlight the window in the statusline
+statusline_highlight_window_on_bell: true
+
 # fixed char-lengths for statusline left/right sides
 statusline_left_side_length: '50'
 statusline_right_side_length: '50'

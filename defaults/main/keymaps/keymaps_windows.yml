@@ -1,0 +1,36 @@
+# See tmux docs for list of key names:
+#   https://github.com/tmux/tmux/wiki/Modifier-Keys
+
+################################################################################
+# WINDOWS
+# Each window is like a "browser tab" of the session.
+# Window option set with set-window-option (add -g for all windows)
+################################################################################
+
+# create a new window and switch to it
+keymap_new_window: 't'
+
+# go to next window (i.e. window to the "right")
+keymap_next_window: '.'
+
+# go to previous window (i.e. window to the "left")
+keymap_prev_window: ','
+
+# move the current window to the left
+keymap_move_curr_window_to_left: '<'
+
+# move the current window to the right
+keymap_move_curr_window_to_right: '>'
+
+# rename the current window (Note: the name appears in the statusline)
+keymap_rename_curr_window: 'r'
+
+# in the current window, switch to any session's pane via a selection list
+keymap_switch_to_any_pane: 'j'
+
+# in the current window, switch to any session's window via a selection list
+keymap_switch_to_any_window: 'J'
+
+# destroy the current window, and all of its panes
+keymap_kill_window: 'X'
+

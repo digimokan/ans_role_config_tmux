@@ -3,11 +3,11 @@
 
 ################################################################################
 # SESSIONS
-# The tmux interfaces that attach to terminal clients and "overlay" them.
+# Each session is a tmux interface that attaches to clients and "overlays" them.
 ################################################################################
 
-# in the current window, switch to another session via a selection list
-keymap_switch_to_session: 'b'
+# in the current window, switch to any session via a selection list
+keymap_switch_to_any_session: 'b'
 
 # rename the current session (which will make it persist on close)
 # Note: new terminal sessions are unnamed, and won't persist on close

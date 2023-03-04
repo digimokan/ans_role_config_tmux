@@ -90,7 +90,7 @@ set-option -g set-titles-string " #{pane_title} "
 
 ################################################################################
 # SESSIONS
-# The tmux interfaces that attach to clients and "overlay" them.
+# Each session is a tmux interface that attaches to clients and "overlays" them.
 # Current session options set with set-option (add -g for all sessions)
 ################################################################################
 
@@ -101,35 +101,58 @@ set-hook -g client-attached "set-option destroy-unattached on"
 set-hook -g session-renamed "set-option destroy-unattached off"
 
 # in the current window, switch to another session via a selection list
-bind-key '{{ keymap_switch_to_session }}' choose-tree -s
+bind-key '{{ keymap_switch_to_any_session }}' choose-tree -s
 
 # rename the current session (which will make it persist on close)
 # Note: new terminal sessions are unnamed, and won't persist on close
 bind-key '{{ keymap_rename_session }}' command-prompt "rename-session '%%'"
 
-# destroy the current session, and all of its panes
+# destroy the current session, and all of its windows and panes
 # Note: a session can be destroyed by this kill cmd, or by exiting all processes
 bind-key '{{ keymap_kill_session }}' kill-session
 
 ################################################################################
 # WINDOWS
+# Each window is like a "browser tab" of the session.
 # Window option set with set-window-option (add -g for all windows)
 ################################################################################
 
-set-option -g base-index 1                        # starting win index
-set-window-option -g monitor-activity off         # highlt sl win with activity
-set-window-option -g monitor-bell on              # highlt sl win with bell
-set-option -g visual-activity on                  # show msg for win with activity
+# starting window index
+set-option -g base-index 1
 
-bind-key 't' new-window -c '#{pane_current_path}' # create and go to new window
-bind-key -r '.' next-window                       # go to next window
-bind-key -r ',' previous-window                   # go to prev window
-bind-key -r '<' swap-window -t -1                 # move curr window left
-bind-key -r '>' swap-window -t +1                 # move curr window right
-bind-key 'r' command-prompt "rename-window '%%'"  # rename current window
-bind-key 'j' choose-window 'join-pane -h -s "%%"' # select pane to bring to curr win
-bind-key 'J' choose-window 'move-window -s "%%"'  # select win to bring to curr win
-bind-key 'X' kill-window                          # close win (and all panes)
+# don't monitor for window activity, or show a msg when there is activity
+set-window-option -g monitor-activity off
+set-option -g visual-activity on
+
+# if terminal for the window does a bell, highlight the window in the statusline
+set-window-option -g monitor-bell {{ 'on' if statusline_highlight_window_on_bell else 'off' }}
+
+# create a new window and switch to it
+bind-key '{{ keymap_new_window }}' new-window -c '#{pane_current_path}'
+
+# go to next window (i.e. window to the "right")
+bind-key -r '{{ keymap_next_window }}' next-window
+
+# go to previous window (i.e. window to the "left")
+bind-key -r '{{ keymap_prev_window }}' previous-window
+
+# move the current window to the left
+bind-key -r '{{ keymap_move_curr_window_to_left }}' swap-window -t -1
+
+# move the current window to the right
+bind-key -r '{{ keymap_move_curr_window_to_right }}' swap-window -t +1
+
+# rename the current window (Note: the name appears in the statusline)
+bind-key '{{ keymap_rename_curr_window }}' command-prompt "rename-window '%%'"
+
+# in the current window, switch to any session's pane via a selection list
+bind-key '{{ keymap_switch_to_any_pane }}' choose-window 'join-pane -h -s "%%"'
+
+# in the current window, switch to any session's window via a selection list
+bind-key '{{ keymap_switch_to_any_window }}' choose-window 'move-window -s "%%"'
+
+# destroy the current window, and all of its panes
+bind-key '{{ keymap_kill_window }}' kill-window
 
 ################################################################################
 # PANES [vim-tmux-navigator]
