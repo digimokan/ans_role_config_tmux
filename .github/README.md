@@ -54,7 +54,7 @@ Install and configure the tmux terminal-multiplexer application.
        - name: "Install and configure the tmux terminal-multiplexer application"
          ansible.builtin.include_role:
            name: ans_role_config_tmux
-           public: yes
+           public: true
          vars:
            tmux_user_name: 'user2'
            start_tmux_session_in_term: { run_term_cmd: 'xterm -e', shell: 'fish' }
